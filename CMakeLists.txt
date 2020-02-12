@@ -5,6 +5,10 @@ project(cmake_wrapper)
 include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
 conan_basic_setup()
 
+if(BUILD_SHARED_LIBS)
+    add_definitions("-DWOFF_DLL")
+endif()
+
 find_package(Brotli REQUIRED)
 set(BROTLIDEC_FOUND ON)
 set(BROTLIDEC_LIBRARIES Brotli::Brotli)

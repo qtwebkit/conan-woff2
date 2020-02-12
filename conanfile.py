@@ -14,7 +14,7 @@ class Woff2Conan(ConanFile):
     options = {"shared": [True, False], "fPIC": [True, False]}
     default_options = {"shared": False, "fPIC": True}
     generators = "cmake", "cmake_find_package_multi"
-    exports_sources = ["CMakeLists.txt"]
+    exports_sources = ["CMakeLists.txt", 'patches/*']
     requires = "brotli/1.0.7"
     _source_subfolder = "sources"
 
@@ -29,9 +29,12 @@ class Woff2Conan(ConanFile):
         os.rename(os.path.join(self._source_subfolder, "CMakeLists.txt"),
                   os.path.join(self._source_subfolder, "CMakeLists_original.txt"))
         os.rename("CMakeLists.txt", os.path.join(self._source_subfolder, "CMakeLists.txt"))
+        # adapted from https://github.com/google/woff2/issues/67
+        tools.patch(patch_file=os.path.join("patches", "woff_dll.patch"), base_path=self._source_subfolder)
 
     def _configure_cmake(self):
         cmake = CMake(self)
+        cmake.definitions["CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS"] = True
         cmake.configure(source_dir=self._source_subfolder)
         return cmake
 
@@ -45,3 +48,5 @@ class Woff2Conan(ConanFile):
 
     def package_info(self):
         self.cpp_info.libs = ["woff2common", "woff2enc", "woff2dec"]
+        if self.options.shared:
+            self.cpp_info.defines.append("WOFF_DLL")
