@@ -27,6 +27,7 @@ environment:
           CONAN_BUILD_REQUIRES: 'msys2_installer/latest@bincrafters/stable'
           CONAN_BUILD_TYPES: Release
           CONAN_BUILD_POLICY: missing
+          CONAN_ARCHS: x86
         - MINGW_CONFIGURATIONS: '7@x86_64@seh@posix'
           CONAN_BUILD_REQUIRES: 'msys2_installer/latest@bincrafters/stable'
           CONAN_BUILD_TYPES: Release
