@@ -15,7 +15,7 @@ class Woff2Conan(ConanFile):
     default_options = {"shared": False, "fPIC": True}
     generators = "cmake", "cmake_find_package_multi"
     exports_sources = ["CMakeLists.txt", 'patches/*']
-    requires = "brotli/1.0.7"
+    requires = "brotli/1.0.7@qtproject/stable"
     _source_subfolder = "sources"
 
     def config_options(self):
