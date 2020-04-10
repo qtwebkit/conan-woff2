@@ -11,7 +11,7 @@ if __name__ == "__main__":
 
     items = []
     for item in builder.items:
-        if item.options["woff2:shared"] == True:
+        if item.options["woff2:shared"] == False:
             items.append(item)
     builder.items = items
 
