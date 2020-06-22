@@ -47,6 +47,6 @@ class Woff2Conan(ConanFile):
         cmake.install()
 
     def package_info(self):
-        self.cpp_info.libs = ["woff2common", "woff2enc", "woff2dec"]
+        self.cpp_info.libs = ["woff2enc", "woff2dec", "woff2common"]
         if self.options.shared:
             self.cpp_info.defines.append("WOFF_DLL")
